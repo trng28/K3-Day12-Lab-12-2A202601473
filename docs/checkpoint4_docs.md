@@ -1,4 +1,4 @@
-# Checkpoint 4 — Scaling & Reliability: Stateless, Readiness, Graceful Shutdown
+# Checkpoint 4: Scaling & Reliability: Stateless, Readiness, Graceful Shutdown
 
 > Block 4 của lab, mốc 11h40–12h20. File này ghi lại những gì đã sửa trong
 > `app/store.py`, `app/lifecycle.py`, `app/main.py` (`/ready`); vì sao sửa

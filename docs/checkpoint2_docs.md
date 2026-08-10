@@ -1,4 +1,4 @@
-# Checkpoint 2 — Docker: Multi-Stage Build, Bảo Mật Image, Compose Stack
+# Checkpoint 2 - Docker: Multi-Stage Build, Bảo Mật Image, Compose Stack
 
 > Block 2 của lab, mốc 10h00–10h45. File này ghi lại những gì đã sửa trong
 > `Dockerfile`, `.dockerignore`, `docker-compose.yml`; vì sao sửa như vậy;

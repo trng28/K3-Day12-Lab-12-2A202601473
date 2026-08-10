@@ -1,4 +1,4 @@
-# Checkpoint 3 — API Security: Authentication, Rate Limiting, Cost Guard
+# Checkpoint 3: API Security: Authentication, Rate Limiting, Cost Guard
 
 > Block 3 của lab, mốc 10h55–11h40. File này ghi lại những gì đã sửa trong
 > `app/auth.py`, `app/rate_limiter.py`, `app/cost_guard.py`, `app/main.py`

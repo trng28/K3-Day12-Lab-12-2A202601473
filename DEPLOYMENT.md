@@ -4,7 +4,7 @@
 
 | Nội dung | Thông tin |
 |---|---|
-| Họ và tên | Nguyễn Mai Thành Trực |
+| Họ và tên | Nguyễn Mai Thanh Trúc |
 | Mã học viên | 2A202601473 |
 | Repository | https://github.com/trng28/K3-Day12-Lab-12-2A202601473 |
 
@@ -121,23 +121,7 @@ khi dịch vụ khởi động.
 
 ## 8. Bằng Chứng
 
-### Kết Quả CI
-
-Các job kiểm thử backend, build frontend và kiểm tra Render image đều hoàn thành thành công trên GitHub Actions.
-
-![Kết quả CI trên GitHub Actions](screenshots/cicd.png)
-
-### Triển Khai Trên Render
-
-Render đã khởi động ứng dụng bằng Uvicorn trên cổng được cấp và công khai dịch vụ tại URL production.
-
-![Trạng thái triển khai trên Render](screenshots/dashboard.png)
-
-### Cấu Hình GitHub Actions Secrets
-
-Repository đã khai báo các secret cần thiết cho tích hợp API và quy trình triển khai tự động. Ảnh chỉ hiển thị tên biến, không hiển thị giá trị bí mật.
-
-![Danh sách GitHub Actions secrets](screenshots/secrets.png)
+Ảnh `screenshots/health.png` ghi nhận trạng thái dịch vụ và kết quả health check.
 
 ## 9. Trạng Thái Hiện Tại
 
@@ -148,5 +132,5 @@ Repository đã khai báo các secret cần thiết cho tích hợp API và quy 
 | FastAPI | Hoạt động |
 | arXiv | Hoạt động |
 | Semantic Scholar | Đã nhận biến môi trường |
-| Secret trong repository | Không có |
+| Secret trong repository | Render Hook URL |
 | Endpoint tương thích CP5 | Đã hoàn thiện trong source, chờ deploy |
