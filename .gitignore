@@ -1,5 +1,10 @@
 # Secrets — KHÔNG BAO GIỜ commit
 .env
+research_app/.env
+research_app/frontend/node_modules/
+research_app/frontend/dist/
+research_app/arxiv_papers/
+research_app/analysis/
 *.pem
 *.key
 

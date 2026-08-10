@@ -5,27 +5,21 @@
 
 services:
   - type: web
-    name: day12-agent
+    name: academic-paper-research-agent
     runtime: docker
-    dockerfilePath: ./Dockerfile
     plan: free
-    healthCheckPath: /health
+    dockerContext: ./research_app
+    dockerfilePath: ./research_app/Dockerfile.render
+    healthCheckPath: /api/health
+    autoDeployTrigger: off
     envVars:
-      - key: AGENT_API_KEY
+      - key: LLM_PROVIDER
+        value: openai
+      - key: LLM_MODEL
+        value: gpt-4o-mini
+      - key: OPENAI_API_KEY
         sync: false
-      - key: LOG_LEVEL
-        value: INFO
-      - key: RATE_LIMIT_PER_MINUTE
-        value: "10"
-      - key: MONTHLY_BUDGET_USD
-        value: "10.0"
-      - key: REDIS_URL
-        fromService:
-          name: day12-redis
-          type: redis
-          property: connectionString
-
-  - type: redis
-    name: day12-redis
-    plan: free
-    ipAllowList: []
+      - key: SEMANTIC_SCHOLAR_API_KEY
+        sync: false
+      - key: ARXIV_USER_AGENT
+        value: AI20k-Day04-Research-Agent/1.0 (educational lab)
