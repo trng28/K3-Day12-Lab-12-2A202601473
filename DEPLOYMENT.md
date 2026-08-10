@@ -121,7 +121,23 @@ khi dịch vụ khởi động.
 
 ## 8. Bằng Chứng
 
-Ảnh `screenshots/health.png` ghi nhận trạng thái dịch vụ và kết quả health check.
+### Kết Quả CI
+
+Các job kiểm thử backend, build frontend và kiểm tra Render image đều hoàn thành thành công trên GitHub Actions.
+
+![Kết quả CI trên GitHub Actions](screenshots/cicd.png)
+
+### Triển Khai Trên Render
+
+Render đã khởi động ứng dụng bằng Uvicorn trên cổng được cấp và công khai dịch vụ tại URL production.
+
+![Trạng thái triển khai trên Render](screenshots/dashboard.png)
+
+### Cấu Hình GitHub Actions Secrets
+
+Repository đã khai báo các secret cần thiết cho tích hợp API và quy trình triển khai tự động. Ảnh chỉ hiển thị tên biến, không hiển thị giá trị bí mật.
+
+![Danh sách GitHub Actions secrets](screenshots/secrets.png)
 
 ## 9. Trạng Thái Hiện Tại
 
