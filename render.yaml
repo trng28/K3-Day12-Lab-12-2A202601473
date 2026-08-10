@@ -11,7 +11,7 @@ services:
     dockerContext: ./research_app
     dockerfilePath: ./research_app/Dockerfile.render
     healthCheckPath: /api/health
-    autoDeployTrigger: off
+    autoDeployTrigger: checksPass
     envVars:
       - key: LLM_PROVIDER
         value: openai

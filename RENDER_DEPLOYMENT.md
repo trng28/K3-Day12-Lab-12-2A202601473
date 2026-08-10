@@ -11,19 +11,18 @@ serves the React UI and the FastAPI endpoints from the same origin.
 4. Provide `OPENAI_API_KEY`. `SEMANTIC_SCHOLAR_API_KEY` is optional.
 5. Create the Blueprint and wait for `/api/health` to become healthy.
 
-Render initially creates the service with automatic deploys disabled because
-deployment is gated by GitHub Actions.
+Render waits for the repository's CI checks to pass before deploying a commit.
 
-## Connect continuous deployment
-
-1. Open the Render service's **Settings** page and copy its Deploy Hook URL.
-2. In GitHub, open **Settings > Secrets and variables > Actions**.
-3. Add a repository secret named `RENDER_DEPLOY_HOOK_URL`.
-4. Push to `main`.
+## Continuous deployment
 
 The `CI and Render Deploy` workflow tests the backend, builds the frontend, and
-builds the production Docker image. It calls the secret deploy hook only after
-all three jobs pass on `main`. Pull requests run validation without deploying.
+builds the production Docker image. With `autoDeployTrigger: checksPass`, Render
+deploys a `main` commit only after those GitHub checks pass. No deploy-hook
+secret is required.
+
+For an existing Render service, sync the Blueprint after changing
+`render.yaml`, or set **Auto-Deploy** to **After CI Checks Pass** in the service
+settings.
 
 ## Local production check
 

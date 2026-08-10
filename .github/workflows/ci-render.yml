@@ -58,18 +58,3 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build production image
         run: docker build -f research_app/Dockerfile.render -t research-agent:ci research_app
-
-  deploy:
-    needs: [test-backend, build-frontend, build-render-image]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger Render deploy
-        env:
-          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        run: |
-          if [ -z "$RENDER_DEPLOY_HOOK_URL" ]; then
-            echo "::warning::RENDER_DEPLOY_HOOK_URL is not configured; skipping deployment."
-            exit 0
-          fi
-          curl --fail --silent --show-error --request POST "$RENDER_DEPLOY_HOOK_URL"
