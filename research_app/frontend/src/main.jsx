@@ -149,7 +149,7 @@ function App() {
         </div>
 
         <button className="new-chat" onClick={newSession}>
-          <Plus size={16} /> New research
+          <Plus size={16} /> <span>New research</span>
         </button>
 
         <div className="source-panel">
@@ -170,7 +170,7 @@ function App() {
           ))}
         </div>
 
-        <a className="repo-link" href="https://github.com" target="_blank">
+        <a className="repo-link" href="https://github.com/trng28/K3-Day12-Lab-12-2A202601473" target="_blank" rel="noreferrer">
           <Github size={15} /> Project repository
         </a>
       </aside>
@@ -190,7 +190,7 @@ function App() {
         <section className="conversation">
           {messages.length === 0 ? (
             <div className="welcome">
-              <div className="orb"><Sparkles size={28} /></div>
+              <div className="welcome-mark"><Sparkles size={22} /></div>
               <h2>What should we investigate?</h2>
               <p>
                 Search academic sources, compare methods, uncover limitations,
