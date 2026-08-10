@@ -16,6 +16,8 @@ concurrency:
 jobs:
   test-backend:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}/research_app
     defaults:
       run:
         working-directory: research_app
@@ -29,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt pytest pytest-asyncio
       - name: Run backend tests
-        run: pytest tests -q
+        run: python -m pytest tests -q
         env:
           LLM_PROVIDER: openai
           LLM_MODEL: gpt-4o-mini
