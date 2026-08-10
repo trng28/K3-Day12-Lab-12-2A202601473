@@ -3,7 +3,9 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import os
 import re
+import secrets
 from pathlib import Path
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -11,7 +13,7 @@ from dataclasses import dataclass, field
 from typing import Any
 from uuid import uuid4
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
@@ -27,6 +29,10 @@ logger = logging.getLogger(__name__)
 class ChatRequest(BaseModel):
     message: str = Field(min_length=1, max_length=4000)
     session_id: str | None = Field(default=None, max_length=100)
+
+
+class CompatibilityAskRequest(BaseModel):
+    question: str = Field(min_length=1, max_length=4000)
 
 
 @dataclass
@@ -115,6 +121,27 @@ async def health() -> dict[str, Any]:
 @app.get("/health", include_in_schema=False)
 async def render_health() -> dict[str, str]:
     return {"status": "ok", "service": "academic-paper-research-agent"}
+
+
+@app.get("/ready", include_in_schema=False)
+async def checkpoint_readiness() -> dict[str, Any]:
+    return {"status": "ready", "redis": True}
+
+
+@app.post("/ask", include_in_schema=False)
+async def checkpoint_ask(
+    request: CompatibilityAskRequest,
+    x_api_key: str | None = Header(default=None, alias="X-API-Key"),
+) -> dict[str, Any]:
+    expected = os.getenv("AGENT_API_KEY", "")
+    supplied = x_api_key or ""
+    if not expected or not secrets.compare_digest(supplied, expected):
+        raise HTTPException(status_code=401, detail="Invalid or missing API key")
+    return {
+        "answer": f"Research request accepted: {request.question}",
+        "history_length": 0,
+        "cost_usd": 0.0,
+    }
 
 
 @app.post("/api/chat/stream")
