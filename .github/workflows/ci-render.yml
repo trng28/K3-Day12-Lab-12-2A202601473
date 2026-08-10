@@ -31,7 +31,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt pytest pytest-asyncio
       - name: Run backend tests
-        run: python -m pytest tests -q
+        run: |
+          SEMANTIC_SCHOLAR_API_KEY=ci-placeholder python -c "from tools.semantic_scholar.tool import semantic_scholar_api_key; assert semantic_scholar_api_key()"
+          python -m pytest tests -q
         env:
           LLM_PROVIDER: openai
           LLM_MODEL: gpt-4o-mini

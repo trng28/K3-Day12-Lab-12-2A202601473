@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
 import re
 from pathlib import Path
 from collections.abc import AsyncIterator
@@ -17,6 +18,10 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from research_chat import ResearchChatbot
+from tools.semantic_scholar.tool import semantic_scholar_api_key
+
+
+logger = logging.getLogger(__name__)
 
 
 class ChatRequest(BaseModel):
@@ -73,6 +78,10 @@ async def stream_chat(
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
+    logger.info(
+        "runtime_config semantic_scholar_api_key=%s",
+        "configured" if semantic_scholar_api_key() else "missing",
+    )
     yield
     SESSIONS.clear()
 
@@ -97,6 +106,9 @@ async def health() -> dict[str, Any]:
         "status": "ok",
         "active_sessions": len(SESSIONS),
         "sources": ["arxiv", "semantic_scholar"],
+        "configuration": {
+            "semantic_scholar_api_key": bool(semantic_scholar_api_key()),
+        },
     }
 
 

@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 
-def load_dotenv(path: Path, *, override: bool = True) -> None:
+def load_dotenv(path: Path, *, override: bool = False) -> None:
     if not path.exists():
         return
     for raw_line in path.read_text(encoding="utf-8").splitlines():
@@ -24,3 +24,4 @@ def load_lab_env(root: Path) -> None:
         load_dotenv(Path(external_path).expanduser())
         return
     load_dotenv(root / ".env")
+    load_dotenv(root.parent / ".env")

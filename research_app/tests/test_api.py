@@ -7,11 +7,13 @@ from fastapi.testclient import TestClient
 import api
 
 
-def test_health() -> None:
+def test_health(monkeypatch) -> None:
+    monkeypatch.setenv("SEMANTIC_SCHOLAR_API_KEY", "test-placeholder")
     with TestClient(api.app) as client:
         response = client.get("/api/health")
     assert response.status_code == 200
     assert response.json()["sources"] == ["arxiv", "semantic_scholar"]
+    assert response.json()["configuration"]["semantic_scholar_api_key"] is True
 
 
 def test_streaming_chat(monkeypatch) -> None:
