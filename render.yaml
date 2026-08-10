@@ -5,12 +5,12 @@
 
 services:
   - type: web
-    name: academic-paper-research-agent
+    name: k3-day12-lab-12-2a202601473
     runtime: docker
     plan: free
-    dockerContext: ./research_app
-    dockerfilePath: ./research_app/Dockerfile.render
-    healthCheckPath: /api/health
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
     autoDeployTrigger: checksPass
     envVars:
       - key: LLM_PROVIDER

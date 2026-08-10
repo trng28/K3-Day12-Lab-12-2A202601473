@@ -100,6 +100,11 @@ async def health() -> dict[str, Any]:
     }
 
 
+@app.get("/health", include_in_schema=False)
+async def render_health() -> dict[str, str]:
+    return {"status": "ok", "service": "academic-paper-research-agent"}
+
+
 @app.post("/api/chat/stream")
 async def chat_stream(request: ChatRequest) -> StreamingResponse:
     session_id, session = get_session(request.session_id)

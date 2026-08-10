@@ -57,4 +57,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build production image
-        run: docker build -f research_app/Dockerfile.render -t research-agent:ci research_app
+        run: docker build -t research-agent:ci .
